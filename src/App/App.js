@@ -16,13 +16,28 @@ class App extends React.Component {
     this.setState({ goats });
   }
 
+  takeAGoat = (goatId) => {
+    // call helper data function
+    goatData.takeGoat(goatId);
+    // get all updated goats
+    const goats = goatData.getGoatData();
+    // update state
+    this.setState({ goats });
+  }
+
+  freeAGoat = (goatId) => {
+    goatData.freeGoat(goatId);
+    const goats = goatData.getGoatData();
+    this.setState({ goats });
+  }
+
   render() {
     const { goats } = this.state;
 
     return (
       <div className="App">
         <h1>Inside Goats</h1>
-        <GoatCorral goats={goats} />
+        <GoatCorral goats={goats} takeAGoat={this.takeAGoat} freeAGoat={this.freeAGoat}/>
       </div>
     );
   }
